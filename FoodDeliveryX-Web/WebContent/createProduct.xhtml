@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="/resources/master.xhtml">
+	<ui:define name="metadata">
+	<f:metadata>
+		<f:viewParam name="id" value="#{processCreateProduct.vendorId}" />
+		<f:viewAction action="#{processCreateProduct.ensureInitialized}" />
+	</f:metadata>
+	</ui:define>
+	<ui:define name="title">New product</ui:define>
+	<ui:define name="content">
+	<div class="inputForm"><h:form>
+		<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
+			<h:outputLabel value="Name" for="name" />
+			<h:inputText id="name" value="#{processCreateProduct.product.name}"/>
+			<h:message for="name"/>
+			<h:outputLabel value="Price (in cents)" for="priceInCent" />
+			<h:inputText id="priceInCent" value="#{processCreateProduct.product.priceInCent}" />
+			<h:message for="priceInCent"/>
+			<f:facet name="footer"><h:commandButton value="Submit" action="#{processCreateProduct.submit}" />
+			<h:commandButton value="Cancel" action="#{processCreateProduct.cancel}" immediate="true" /></f:facet>
+		</h:panelGrid>
+	</h:form></div>
+	<div class="result"><h:outputText rendered="#{not empty processCreateProduct.error}" styleClass="error" value="#{processCreateProduct.error}" /></div>
+	</ui:define>
+</ui:composition>
+</html>

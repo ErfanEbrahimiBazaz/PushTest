@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/resources/master.xhtml">
+	<ui:define name="metadata">
+	<f:metadata>
+		<f:viewParam name="id" value="#{userPage.userId}" />
+		<f:viewAction action="#{userPage.ensureInitialized}" />
+	</f:metadata>
+	</ui:define>
+	<ui:define name="title">User #{userPage.user.lastName}, #{userPage.user.firstName}</ui:define>
+	<ui:define name="content">
+	<div class="details"><h2>User #{userPage.user.lastName}, #{userPage.user.firstName}</h2>
+	<h:panelGrid columns="2" columnClasses="label, value" styleClass="details-table">
+		ID
+		<h:outputText value="#{userPage.user.userId}" />
+		First Name
+		<h:outputText value="#{userPage.user.firstName}" />
+		Last Name 
+		<h:outputText value="#{userPage.user.lastName}" />
+		IBAN
+		<h:outputText value="#{userPage.user.iban}" />
+		BIC
+		<h:outputText value="#{userPage.user.bic}" />
+	</h:panelGrid></div>
+	<div><h3>Address</h3>
+	<h:panelGrid columns="2" columnClasses="label, value" styleClass="details-table"> 
+		ID
+		<h:outputText value="#{userPage.user.address.addressId}" />
+		Street
+		<h:outputText value="#{userPage.user.address.street}" />
+		Street No
+		<h:outputText value="#{userPage.user.address.streetNo}" />
+		Zip code
+		<h:outputText value="#{userPage.user.address.zip}" />
+		City
+		<h:outputText value="#{userPage.user.address.city}" />
+		Additional location information
+		<h:outputText value="#{userPage.user.address.additionalLocationInformation}" />
+	</h:panelGrid></div>
+	</ui:define>
+</ui:composition>
+</html>

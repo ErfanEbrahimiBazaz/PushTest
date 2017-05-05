@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/resources/master.xhtml">
+	<ui:define name="metadata">
+	<f:metadata>
+		<f:viewParam name="id" value="#{vendorPage.vendorId}" />
+		<f:viewAction action="#{vendorPage.ensureInitialized}" />
+	</f:metadata>
+	</ui:define>
+	<ui:define name="title">Vendor #{vendorPage.vendor.name}</ui:define>
+	<ui:define name="content">
+	<div class="details"><h2>Vendor: #{vendorPage.vendor.name}</h2>
+	<h:panelGrid columns="2" columnClasses="label, value" styleClass="details-table">
+		ID
+		<h:outputText value="#{vendorPage.vendor.vendorId}" />
+		Name
+		<h:outputText value="#{vendorPage.vendor.name}" />
+		Zip code
+		<h:outputText value="#{vendorPage.vendor.zip}" />
+	</h:panelGrid></div>
+	<div><h3>Products</h3>
+	<h:dataTable value="#{vendorPage.products}" var="cur"
+		rendered="#{not empty vendorPage.products}"
+		styleClass="data-table" 
+		columnClasses="data-cell,data-cell, data-cell"
+		headerClass="data-cell header-cell">
+		<h:column>
+			<f:facet name="header">Product ID</f:facet>
+			#{cur.productId}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Name</f:facet>
+			#{cur.name}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Price (in cents)</f:facet>
+			#{cur.priceInCent}
+		</h:column>
+	</h:dataTable>
+	<h:link outcome="/createProduct.xhtml" value="Add new product">
+		<f:param name="id" value="#{vendorPage.vendor.vendorId}" />
+	</h:link>
+	</div>
+	</ui:define>
+</ui:composition>
+</html>
